@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: black;
+            color: white;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .flower {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background-color: yellow;
+            border-radius: 50%;
+            transform-origin: 50% 50%;
+            animation: grow 5s linear forwards;
+            display: none;
+        }
+
+        .heart {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            color: red;
+            display: none;
+            animation: float 2s linear infinite;
+        }
+
+        @keyframes grow {
+            0% {
+                transform: translateY(100vh) scale(0);
+            }
+            50% {
+                transform: translateY(50vh) scale(1);
+            }
+            100% {
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        #message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            text-align: center;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="message">TE AMO Gabyfer</div>
+
+    <script>
+        function createFlower() {
+            const flower = document.createElement('div');
+            flower.className = 'flower';
+            document.body.appendChild(flower);
+
+            const x = Math.random() * window.innerWidth;
+            flower.style.left = `${x}px`;
+
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '❤';
+            document.body.appendChild(heart);
+
+            heart.style.left = `${x}px`;
+
+            const y = Math.random() * window.innerHeight;
+            flower.style.top = heart.style.top = `${y}px`;
+
+            heart.style.fontSize = `${Math.random() * 20 + 10}px`;
+
+            setTimeout(() => {
+                flower.style.display = 'block';
+                heart.style.display = 'block';
+            }, Math.random() * 5000);
+        }
+
+        setInterval(createFlower, 1000);
+
+        setTimeout(() => {
+            document.getElementById('message').style.display = 'block';
+        }, 5000);
+    </script>
+</body>
+</html>
